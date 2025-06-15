@@ -121,14 +121,33 @@ export const useReminderStore = create<ReminderStore>()(
           reminders: state.reminders.map(reminder => {
             if (reminder.id === id) {
               const isCompleted = !reminder.isCompleted;
-              const newStreak = isCompleted ? reminder.streak + 1 : Math.max(0, reminder.streak - 1);
+              const now = new Date();
+              const lastCompleted = reminder.completedAt;
+              
+              let newStreak = reminder.streak;
+              if (isCompleted) {
+                if (lastCompleted) {
+                  const daysSinceLastCompletion = Math.floor(
+                    (now.getTime() - lastCompleted.getTime()) / (1000 * 60 * 60 * 24)
+                  );
+                  if (daysSinceLastCompletion === 1) {
+                    newStreak = reminder.streak + 1;
+                  } else if (daysSinceLastCompletion > 1) {
+                    newStreak = 1;
+                  }
+                } else {
+                  newStreak = 1;
+                }
+              } else {
+                newStreak = Math.max(0, reminder.streak - 1);
+              }
               
               return {
                 ...reminder,
                 isCompleted,
-                completedAt: isCompleted ? new Date() : undefined,
+                completedAt: isCompleted ? now : undefined,
                 streak: newStreak,
-                updatedAt: new Date(),
+                updatedAt: now,
               };
             }
             return reminder;

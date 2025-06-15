@@ -42,7 +42,7 @@ export function StatsCard() {
   ];
 
   return (
-    <div className="grid grid-cols-3 gap-3 p-4">
+    <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-3 p-3 sm:p-4">
       {stats.map((stat, index) => (
         <motion.div
           key={stat.label}
@@ -51,12 +51,12 @@ export function StatsCard() {
           transition={{ delay: index * 0.1 }}
         >
           <Card className="border-0 shadow-sm">
-            <CardContent className="p-3 text-center">
-              <div className={`inline-flex items-center justify-center w-8 h-8 rounded-full ${stat.bgColor} mb-2`}>
-                <stat.icon className={`h-4 w-4 ${stat.color}`} />
+            <CardContent className="p-2 sm:p-3 text-center">
+              <div className={`inline-flex items-center justify-center w-7 h-7 sm:w-8 sm:h-8 rounded-full ${stat.bgColor} mb-1 sm:mb-2`}>
+                <stat.icon className={`h-3 w-3 sm:h-4 sm:w-4 ${stat.color}`} />
               </div>
-              <p className="text-lg font-semibold text-gray-900">{stat.value}</p>
-              <p className="text-xs text-gray-600 leading-tight">{stat.label}</p>
+              <p className="text-base sm:text-lg font-semibold text-gray-900">{stat.value}</p>
+              <p className="text-[10px] sm:text-xs text-gray-600 leading-tight">{stat.label}</p>
             </CardContent>
           </Card>
         </motion.div>

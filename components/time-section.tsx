@@ -40,14 +40,14 @@ export function TimeSection({
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className={`border-l-4 pl-4 py-4 ${timeSlotColors[title]}`}
+      className={`border-l-4 pl-3 sm:pl-4 py-3 sm:py-4 ${timeSlotColors[title]}`}
     >
-      <div className="flex items-center justify-between mb-4">
-        <div className="flex items-center gap-3">
-          <span className="text-2xl">{timeSlotEmojis[title]}</span>
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 mb-4">
+        <div className="flex items-center gap-2 sm:gap-3">
+          <span className="text-xl sm:text-2xl">{timeSlotEmojis[title]}</span>
           <div>
-            <h2 className="text-lg font-semibold text-gray-900">{title}</h2>
-            <p className="text-sm text-gray-600">
+            <h2 className="text-base sm:text-lg font-semibold text-gray-900">{title}</h2>
+            <p className="text-xs sm:text-sm text-gray-600">
               {completedCount} of {totalCount} completed
             </p>
           </div>
@@ -56,24 +56,24 @@ export function TimeSection({
         <Button
           onClick={onAddReminder}
           size="sm"
-          className="bg-teal-500 hover:bg-teal-600 text-white"
+          className="w-full sm:w-auto bg-teal-500 hover:bg-teal-600 text-white"
         >
           <Plus className="h-4 w-4 mr-1" />
           Add
         </Button>
       </div>
 
-      <div className="space-y-3">
+      <div className="space-y-2 sm:space-y-3">
         <AnimatePresence mode="popLayout">
           {reminders.length === 0 ? (
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              className="text-center py-8 text-gray-500"
+              className="text-center py-6 sm:py-8 text-gray-500"
             >
-              <div className="text-4xl mb-2">🐾</div>
-              <p>No reminders for this time</p>
-              <p className="text-sm">Add one to get started!</p>
+              <div className="text-3xl sm:text-4xl mb-2">🐾</div>
+              <p className="text-sm sm:text-base">No reminders for this time</p>
+              <p className="text-xs sm:text-sm">Add one to get started!</p>
             </motion.div>
           ) : (
             reminders.map((reminder) => (
