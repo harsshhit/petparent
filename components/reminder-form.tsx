@@ -111,28 +111,25 @@ export function ReminderForm({ isOpen, onClose, reminder }: ReminderFormProps) {
 
   return (
     <Dialog open={isOpen} onOpenChange={handleClose}>
-      <DialogContent className="w-screen h-screen max-w-none sm:max-w-none md:max-w-none p-0 rounded-none border-none shadow-none bg-white">
-        <DialogHeader className="flex flex-row items-center justify-between p-4 border-b border-gray-200 bg-white sticky top-0 z-10">
-          <Button type="button" variant="ghost" onClick={handleClose} className="p-2 hover:bg-gray-100 rounded-full">
-            <span className="text-xl">←</span>
-          </Button>
-          <DialogTitle className="text-lg font-semibold text-gray-900 flex-1 text-center">Add Reminder</DialogTitle>
-          <Button type="submit" form="reminder-form" className="p-2 text-teal-600 bg-transparent shadow-none hover:bg-gray-100 rounded-full">Save</Button>
+      <DialogContent className="w-full max-w-full sm:max-w-lg md:max-w-2xl px-2 sm:px-4 md:px-6 py-4 rounded-none sm:rounded-lg border-gray-200 shadow-xl box-border overflow-y-auto max-h-[100dvh]">
+        <DialogHeader className="flex flex-row items-center justify-between pb-2 border-b border-gray-200">
+          <Button type="button" variant="ghost" onClick={handleClose} className="p-0 text-lg">←</Button>
+          <DialogTitle className="text-base font-semibold text-gray-900 flex-1 text-center">Add Reminder</DialogTitle>
+          <Button type="submit" form="reminder-form" className="p-0 text-teal-600 bg-transparent shadow-none hover:bg-transparent hover:underline">Save</Button>
         </DialogHeader>
 
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 p-4 sm:p-6 max-w-3xl mx-auto" id="reminder-form">
-            <div className="flex flex-col gap-4 sm:flex-row sm:gap-4 w-full">
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4" id="reminder-form">
+            <div className="flex flex-col gap-3 sm:flex-row sm:gap-2 mt-4 mb-2 w-full">
               <div className="flex-1">
                 <FormField
                   control={form.control}
                   name="pet"
                   render={({ field }) => (
                     <FormItem className="w-full">
-                      <FormLabel className="text-sm font-medium text-gray-700 mb-2 block">Pet</FormLabel>
                       <Select onValueChange={field.onChange} defaultValue={field.value}>
                         <FormControl>
-                          <SelectTrigger className="h-11 rounded-lg border-gray-200 w-full bg-white hover:border-teal-500 focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all">
+                          <SelectTrigger className="h-10 rounded-lg border-gray-200 w-full" >
                             <SelectValue placeholder="Select Pet" />
                           </SelectTrigger>
                         </FormControl>
@@ -151,10 +148,9 @@ export function ReminderForm({ isOpen, onClose, reminder }: ReminderFormProps) {
                   name="category"
                   render={({ field }) => (
                     <FormItem className="w-full">
-                      <FormLabel className="text-sm font-medium text-gray-700 mb-2 block">Category</FormLabel>
                       <Select onValueChange={field.onChange} defaultValue={field.value}>
                         <FormControl>
-                          <SelectTrigger className="h-11 rounded-lg border-gray-200 w-full bg-white hover:border-teal-500 focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all">
+                          <SelectTrigger className="h-10 rounded-lg border-gray-200 w-full">
                             <SelectValue placeholder="Select Category" />
                           </SelectTrigger>
                         </FormControl>
@@ -170,118 +166,122 @@ export function ReminderForm({ isOpen, onClose, reminder }: ReminderFormProps) {
               </div>
             </div>
 
-            <div className="bg-gray-50 rounded-xl p-6 space-y-4 shadow-sm">
-              <h3 className="text-lg font-semibold text-gray-900">Reminder Info</h3>
-              <FormField
-                control={form.control}
-                name="title"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="text-sm font-medium text-gray-700">Set a reminder for...</FormLabel>
-                    <FormControl>
-                      <Input 
-                        placeholder="Type here..." 
-                        maxLength={100} 
-                        {...field} 
-                        className="h-11 rounded-lg border-gray-200 w-full bg-white hover:border-teal-500 focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all" 
-                      />
-                    </FormControl>
-                    <div className="text-xs text-gray-400 text-right mt-1">{field.value?.length || 0}/100</div>
-                  </FormItem>
-                )}
-              />
-              <div className="flex flex-col gap-3 sm:flex-row items-stretch">
-                <div className="flex-1">
-                  <FormField
-                    control={form.control}
-                    name="notes"
-                    render={({ field }) => (
-                      <FormItem className="w-full">
-                        <FormLabel className="text-sm font-medium text-gray-700">Add Notes (Optional)</FormLabel>
-                        <FormControl>
-                          <Textarea 
-                            placeholder="Add notes..." 
-                            {...field} 
-                            className="min-h-[100px] rounded-lg border-gray-200 w-full bg-white hover:border-teal-500 focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all resize-none" 
-                          />
-                        </FormControl>
-                      </FormItem>
-                    )}
-                  />
+            <div className="bg-gray-100 rounded-none sm:rounded-lg mb-4 w-full">
+              <div className="bg-black text-white rounded-t-none sm:rounded-t-lg px-4 py-2 text-sm font-semibold">Reminder Info</div>
+              <div className="p-4 space-y-3">
+                <FormField
+                  control={form.control}
+                  name="title"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-sm font-medium text-gray-700">Set a reminder for...</FormLabel>
+                      <FormControl>
+                        <Input placeholder="Type here..." maxLength={100} {...field} className="h-10 rounded-lg border-gray-200 w-full" />
+                      </FormControl>
+                      <div className="text-xs text-gray-400 text-right">{field.value?.length || 0}/100</div>
+                    </FormItem>
+                  )}
+                />
+                <div className="flex flex-col gap-2 sm:flex-row items-stretch">
+                  <div className="flex-1">
+                    <FormField
+                      control={form.control}
+                      name="notes"
+                      render={({ field }) => (
+                        <FormItem className="w-full">
+                          <FormLabel className="text-sm font-medium text-gray-700">Add Notes (Optional)</FormLabel>
+                          <FormControl>
+                            <Input placeholder="Add notes..." {...field} className="h-10 rounded-lg border-gray-200 w-full" />
+                          </FormControl>
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+                  <div className="flex-none">
+                    <Button type="button" variant="outline" className="h-10 w-full sm:w-auto">Add</Button>
+                  </div>
                 </div>
               </div>
             </div>
 
-            <div className="bg-gray-50 rounded-xl p-6 space-y-4 shadow-sm">
-              <h3 className="text-lg font-semibold text-gray-900">Reminder Settings</h3>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <FormField
-                  control={form.control}
-                  name="startDateTime"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="text-sm font-medium text-gray-700">Start Date</FormLabel>
-                      <FormControl>
-                        <Input 
-                          type="date" 
-                          {...field} 
-                          className="h-11 rounded-lg border-gray-200 w-full bg-white hover:border-teal-500 focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all" 
-                        />
-                      </FormControl>
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="startDateTime"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="text-sm font-medium text-gray-700">Reminder Time</FormLabel>
-                      <FormControl>
-                        <Input 
-                          type="time" 
-                          {...field} 
-                          className="h-11 rounded-lg border-gray-200 w-full bg-white hover:border-teal-500 focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all" 
-                        />
-                      </FormControl>
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="frequency"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="text-sm font-medium text-gray-700">Reminder Frequency</FormLabel>
-                      <FormControl>
-                        <Select onValueChange={field.onChange} defaultValue={field.value}>
-                          <SelectTrigger className="h-11 rounded-lg border-gray-200 w-full bg-white hover:border-teal-500 focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all">
-                            <SelectValue placeholder="Everyday" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="Daily">Everyday</SelectItem>
-                            <SelectItem value="Weekly">Weekly</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </FormControl>
-                    </FormItem>
-                  )}
-                />
+            <div className="bg-gray-100 rounded-none sm:rounded-lg mb-4 w-full">
+              <div className="bg-black text-white rounded-t-none sm:rounded-t-lg px-4 py-2 text-sm font-semibold flex items-center justify-between">
+                <span>Reminder Settings</span>
+                <span className="text-white">⌄</span>
+              </div>
+              <div className="p-4 space-y-4">
+                <div className="flex flex-col gap-3 sm:flex-row w-full">
+                  <div className="flex-1">
+                    <FormField
+                      control={form.control}
+                      name="startDateTime"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="text-sm font-medium text-gray-700">Start Date</FormLabel>
+                          <FormControl>
+                            <Input type="date" {...field} className="h-10 rounded-lg border-gray-200 w-full" />
+                          </FormControl>
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+                  <div className="flex-none flex items-end">
+                    <Button type="button" variant="ghost" className="p-0 text-teal-600 whitespace-nowrap">+ Add End Date</Button>
+                  </div>
+                </div>
+                <div className="flex flex-col gap-3 sm:flex-row w-full">
+                  <div className="flex-1">
+                    <FormField
+                      control={form.control}
+                      name="startDateTime"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="text-sm font-medium text-gray-700">Reminder Time</FormLabel>
+                          <FormControl>
+                            <Input type="time" {...field} className="h-10 rounded-lg border-gray-200 w-full" />
+                          </FormControl>
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+                  <div className="flex-1">
+                    <FormField
+                      control={form.control}
+                      name="frequency"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="text-sm font-medium text-gray-700">Reminder Frequency</FormLabel>
+                          <FormControl>
+                            <Select onValueChange={field.onChange} defaultValue={field.value}>
+                              <SelectTrigger className="h-10 rounded-lg border-gray-200 w-full">
+                                <SelectValue placeholder="Everyday" />
+                              </SelectTrigger>
+                              <SelectContent>
+                                <SelectItem value="Daily">Everyday</SelectItem>
+                                <SelectItem value="Weekly">Weekly</SelectItem>
+                              </SelectContent>
+                            </Select>
+                          </FormControl>
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+                </div>
               </div>
             </div>
 
-            <DialogFooter className="flex-col-reverse sm:flex-row gap-3 sm:gap-4 pt-4 border-t border-gray-200">
+            <DialogFooter className="flex-col-reverse sm:flex-row gap-3 sm:gap-4 pt-2">
               <Button 
                 type="button" 
                 variant="outline" 
                 onClick={handleClose} 
-                className="w-full sm:w-auto h-11 rounded-lg border-gray-200 hover:bg-gray-50 transition-colors"
+                className="w-full sm:w-auto h-10 rounded-lg border-gray-200 hover:bg-gray-50 transition-colors"
               >
                 Cancel
               </Button>
               <Button 
                 type="submit" 
-                className="w-full sm:w-auto h-11 rounded-lg bg-teal-600 hover:bg-teal-700 text-white transition-colors"
+                className="w-full sm:w-auto h-10 rounded-lg bg-teal-600 hover:bg-teal-700 text-white transition-colors"
               >
                 {isEditing ? 'Update' : 'Create'} Reminder
               </Button>
