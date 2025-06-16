@@ -95,21 +95,24 @@ export default function HomePage() {
       </Button>
 
       {/* Bottom Navigation */}
-      <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 h-16 flex items-center justify-around z-40">
+      <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-100 px-4 py-2 flex items-center justify-around z-20">
         <button className="flex flex-col items-center text-gray-400 focus:outline-none">
-          <Home className="h-6 w-6 mb-1" />
+          <Home className="h-5 w-5 sm:h-6 sm:w-6 mb-0.5 sm:mb-1" />
+          <span className="text-[10px] sm:text-xs">Home</span>
         </button>
         <button className="flex flex-col items-center text-gray-400 focus:outline-none">
-          <PawPrint className="h-6 w-6 mb-1" />
+          <PawPrint className="h-5 w-5 sm:h-6 sm:w-6 mb-0.5 sm:mb-1" />
+          <span className="text-[10px] sm:text-xs">Pets</span>
         </button>
         <button className="flex flex-col items-center text-black font-semibold focus:outline-none">
-          <div className="bg-black rounded-full px-3 py-1 flex flex-col items-center">
-            <Bell className="h-6 w-6 text-white" />
-            <span className="text-xs text-white mt-0.5">reminders</span>
+          <div className="bg-black rounded-full px-2.5 sm:px-3 py-1 flex flex-col items-center">
+            <Bell className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
+            <span className="text-[10px] sm:text-xs text-white mt-0.5">reminders</span>
           </div>
         </button>
         <button className="flex flex-col items-center text-gray-400 focus:outline-none">
-          <Settings className="h-6 w-6 mb-1" />
+          <Settings className="h-5 w-5 sm:h-6 sm:w-6 mb-0.5 sm:mb-1" />
+          <span className="text-[10px] sm:text-xs">Settings</span>
         </button>
       </nav>
 
